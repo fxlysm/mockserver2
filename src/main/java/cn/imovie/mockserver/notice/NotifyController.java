@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
 import java.util.Map;
 
-@RestController
-@RequestMapping(value = "/payCenterApi")
+//@RestController
+//@RequestMapping(value = "/payCenterApi")
 public class NotifyController {
     private static final Logger logger = LoggerFactory.getLogger(NotifyController.class);
 

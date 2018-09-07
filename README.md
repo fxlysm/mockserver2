@@ -1,14 +1,22 @@
 # 测试桩说明
-##环境配置
-  ### mysql:(暂未使用)
+### 环境配置
+  ####  mysql:
+  
+    host:192.168.100.203
+    post:3306
+    account:root
+    password:r00tm1
    
-   ###redis:
-   host:192.168.100.203
+   #### redis:
+   
+    host:192.168.100.203
+    post:6379
+    password:swimovie
    
    
- ## 运行
+ ### 运行
  
-  可将配置文件外置并设置相关参数：
+  可将配置文件外置并设置相关参数于application-test.properties：
   1. key ----签名 
   2. redis ----订单缓存 
 
@@ -17,7 +25,18 @@
      java -c XX.jar --spring.profiles.active=test 
 
 
-## 支付流程
+## 微信支付
+
+### 接口
+
+   |名称|API接口名称|开发情况|
+   |-------------|:-------------:|:-------------:|
+   |/pay/unifiedorder|统一下单|已开发
+   |/pay/refundquery| 退款查询|未开发
+   |/pay/closeorder| 关闭订单|未开发
+   |/pay/orderquery| 订单查询|已开发
+   |/pay/downloadbill |对帐单下载|未开发
+   |/pay/downloadfundflow|下载资金账单|未开发
 
 请求必传：
 
@@ -80,12 +99,21 @@
      <transaction_id><![CDATA[18071219050082462314]]></transaction_id>
      </xml>
      
+## 淘票票
+
+     接口：$host:$post/router/rest
      
+   |名称|API接口名称|开发情况|
+   |-------------|:-------------:|:-------------:|
+    |获取城市列表API|[taobao.film.data.third.party.regions.get](http://open.taobao.com/api.htm?docId=29594&docType=2)| 已开发
+    |获取即将上映影片列表API|[taobao.film.data.third.party.soonshows.get](http://open.taobao.com/api.htm?docId=29600&docType=2)| 开发中
+    |获取热映影片列表API|[taobao.film.data.third.party.hotshows.get](http://open.taobao.com/api.htm?docId=29607&docType=2)| 开发中
+    |基于影片获取影评API|[taobao.film.data.third.party.showcomments.get](http://open.taobao.com/api.htm?docId=29903&docType=2)| 未开发
+   |获取影院列表API|[taobao.film.data.third.party.cinemas.get](http://open.taobao.com/api.htm?docId=29595&docType=2)| 已开发
+   |基于影院获取场次信息API|[taobao.film.data.third.party.schedules.get](http://open.taobao.com/api.htm?docId=29597&docType=2)| 未开发
+   |基于场次获取座位图API|[taobao.film.data.third.party.seat.map](http://open.taobao.com/api.htm?docId=30087&docType=2)| 未开发
+   |锁定座位API|[taobao.film.data.third.party.lock.seat](http://open.taobao.com/api.htm?docId=30171&docType=2)| 未开发
+   |解锁座位API|[taobao.film.data.third.party.unlock.seat](http://open.taobao.com/api.htm?docId=30169&docType=2)| 未开发
+   |下单出票API|[taobao.film.data.third.party.issue.order](http://open.taobao.com/api.htm?docId=30441&docType=2)| 未开发
      
-     
- ## 目前完成情况 
- 
-  微信 统一下单/支付通知
-  
- 
- ## 未完成情况
+

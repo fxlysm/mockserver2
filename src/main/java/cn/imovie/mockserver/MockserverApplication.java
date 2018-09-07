@@ -1,5 +1,6 @@
 package cn.imovie.mockserver;
 
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,9 +14,17 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableAspectJAutoProxy(proxyTargetClass=true)
 @ComponentScan(basePackages = "cn")
 @SpringBootApplication
+
 public class MockserverApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MockserverApplication.class, args);
+//        SpringApplication.run(MockserverApplication.class, args);
+//        springApplication.setBannerMode(Banner.Mode.OFF);
+        SpringApplication springApplication = new SpringApplication(MockserverApplication.class);
+//        springApplication.setBannerMode(Banner.Mode.OFF);
+        springApplication.run(args);
     }
+
+
+
 }

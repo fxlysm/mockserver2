@@ -34,14 +34,14 @@ public class RedisWeChatServer {
     @Scheduled(cron = "*/10 * * * * ?")
     public  void payNotify()   {
         int count= redisTemplate.opsForHash().keys(PFMOCK).size();
-        logger.debug("**********读取微信订单缓存个数："+count+"**********************");
-        System.out.println("**********读取微信订单缓存个数："+count+"**********************");
+        logger.info("**********读取微信订单缓存个数："+count+"**********************");
+
 
         Set<Object> set  =redisTemplate.opsForHash().keys(PFMOCK);
         Iterator<Object> it = set.iterator();
         while (it.hasNext()){
             Object ob =  it.next();
-            logger.debug("正在处理订单："+ob);
+            logger.info("正在处理订单："+ob);
 //            Object v = redisTemplate.opsForValue().get(ob);
 //            System.out.println("key:" +ob +", value:" +v);
             Object v=   redisTemplate.opsForHash().get(PFMOCK,ob);
@@ -58,9 +58,9 @@ public class RedisWeChatServer {
                 if(map.get("return_code").equals("SUCCESS")){
                     payNotice.payNotify(map);
 
-                    logger.debug("订单处理完成"+ob);
+                    logger.info("订单处理完成"+ob);
                 }else {
-                    logger.debug("订单支付return_code为非SUCCESS，不做通知处理");
+                    logger.info("订单支付return_code为非SUCCESS，不做通知处理");
                 }
 
                 redisTemplate.opsForHash().delete(PFMOCK,ob);
