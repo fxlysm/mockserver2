@@ -105,10 +105,10 @@
      
    |名称|API接口名称|开发情况|
    |-------------|:-------------:|:-------------:|
-    |获取城市列表API|[taobao.film.data.third.party.regions.get](http://open.taobao.com/api.htm?docId=29594&docType=2)| 已开发
-    |获取即将上映影片列表API|[taobao.film.data.third.party.soonshows.get](http://open.taobao.com/api.htm?docId=29600&docType=2)| 开发中
-    |获取热映影片列表API|[taobao.film.data.third.party.hotshows.get](http://open.taobao.com/api.htm?docId=29607&docType=2)| 开发中
-    |基于影片获取影评API|[taobao.film.data.third.party.showcomments.get](http://open.taobao.com/api.htm?docId=29903&docType=2)| 未开发
+   |获取城市列表API|[taobao.film.data.third.party.regions.get](http://open.taobao.com/api.htm?docId=29594&docType=2)| 已开发
+   |获取即将上映影片列表API|[taobao.film.data.third.party.soonshows.get](http://open.taobao.com/api.htm?docId=29600&docType=2)| 开发中
+   |获取热映影片列表API|[taobao.film.data.third.party.hotshows.get](http://open.taobao.com/api.htm?docId=29607&docType=2)| 开发中
+   |基于影片获取影评API|[taobao.film.data.third.party.showcomments.get](http://open.taobao.com/api.htm?docId=29903&docType=2)| 未开发
    |获取影院列表API|[taobao.film.data.third.party.cinemas.get](http://open.taobao.com/api.htm?docId=29595&docType=2)| 已开发
    |基于影院获取场次信息API|[taobao.film.data.third.party.schedules.get](http://open.taobao.com/api.htm?docId=29597&docType=2)| 未开发
    |基于场次获取座位图API|[taobao.film.data.third.party.seat.map](http://open.taobao.com/api.htm?docId=30087&docType=2)| 未开发
