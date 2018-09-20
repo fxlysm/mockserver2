@@ -185,4 +185,10 @@ public class StringUtil {
         return map;
 
     }
+
+
+    public static String UuId(){
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString();
+    }
 }

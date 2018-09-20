@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -129,6 +130,7 @@ public class WechatJsPay implements WechatJSServer {
         String res = XmlUtils.toXml(respMap);
         logger.info("Pay Req" + res);
         resp.getWriter().write(res);
+//        out.println(res);
 
 //        out.print(respMap);
 

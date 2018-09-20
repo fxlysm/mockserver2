@@ -5,7 +5,7 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class checkserver {
     @Retryable(value = {RemoteAccessException.class, RuntimeException.class},
             maxAttempts = 5,

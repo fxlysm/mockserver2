@@ -7,6 +7,7 @@ import cn.imovie.mockserver.Alipay.server.tradepayServer;
 import cn.imovie.mockserver.util.MapJson;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -38,6 +39,7 @@ public class AlipayPayServer {
     private static final Logger logger = LoggerFactory.getLogger(AlipayPayServer.class);
     @ApiOperation("支付宝支付交易相关接口")
     @RequestMapping(value="gateway.do", method = RequestMethod.POST,produces = "text/html;charset=UTF-8")
+
     @ResponseBody
     public void   getPay(@RequestParam Map<String, String> map ,@Valid  @RequestBody AlipayPay alipayp,  BindingResult bindingResult,HttpServletResponse resp) throws Exception {
         if(bindingResult.hasErrors()){

@@ -19,45 +19,42 @@ public class TPPCreatSchedules {
     private JdbcTemplate jdbcTemplate;
 
 
-    @Scheduled(cron = "*/20 * * * * ?")//每天早上两点自动生成排期  0 0 2 ? * *
+    @Scheduled(cron = "${jobs.schedule.cron}")//每天早上两点自动生成排期  0 0 2 ? * *   //*/20 * * * * ?
     public  void CreatSchedules()   {
 
 
         String cinemas_command="SELECT * FROM tpp_cinemaslist c,tpp_cinema_hall h WHERE c.cinema_id = h.cinema_id";
-        String film_comand="SELECT * FROM tpp_film";
+        String film_comand="SELECT * FROM tpp_film WHERE schedules_state='1'";
 
         logger.info("查询影院 Command:"+cinemas_command);
         logger.info("查询影片 Command:"+film_comand);
-        List rows = jdbcTemplate.queryForList(cinemas_command);
-        logger.info("影厅数："+rows.size());
+
+
 
         List filmrows = jdbcTemplate.queryForList(film_comand);
-        logger.info("影院数："+filmrows.size());
-
-        Iterator rowsit = rows.iterator();
-
+        logger.info("影片数："+filmrows.size());
         Iterator filmit = filmrows.iterator();
 
-        while(rowsit.hasNext()) {
-            Map cinemas_map = (Map) rowsit.next();
-            logger.info("影院MAP"+cinemas_map);
+        while(filmit.hasNext()) {
 
-            String hall_name=cinemas_map.get("hall_name").toString();
-            String price=cinemas_map.get("price").toString();
-            String service_fee=cinemas_map.get("service_fee").toString();
+            Map film_map = (Map) filmit.next();
+            logger.info("影片MAP"+film_map);
+            String show_id=film_map.get("show_id").toString();
+            String show_version=film_map.get("show_version_list").toString();
 
 
-            while(filmit.hasNext()) {
-                Map film_map = (Map) filmit.next();
-                logger.info("影片MAP"+film_map);
-
+            List rows = jdbcTemplate.queryForList(cinemas_command);
+            logger.info("影厅数："+rows.size());
+            Iterator rowsit = rows.iterator();
+            while(rowsit.hasNext()) {
+                Map cinemas_map = (Map) rowsit.next();
+                logger.info("影厅MAP"+cinemas_map);
+                String hall_name=cinemas_map.get("hall_name").toString();
+                String hall_id=cinemas_map.get("hall_id").toString();
+                String price=cinemas_map.get("price").toString();
+                String service_fee=cinemas_map.get("service_fee").toString();
                 String cinema_id= cinemas_map.get("cinema_id").toString();
-                String schedules_id= StringUtil.getStringDate("yyyyMMddHHmmss")+StringUtil.getCode(4,0);
-
-
-
-                String show_id=film_map.get("show_id").toString();
-                String show_version=film_map.get("show_version_list").toString();
+                String schedules_id= StringUtil.getStringDate("yyMMddHHmmss")+StringUtil.getCode(6,0);
 
 
                 Map<String,String> showschedu= DateUtil.GetRandomDate();
@@ -69,17 +66,11 @@ public class TPPCreatSchedules {
 
                 String max_can_buy="4";
 
-                String inset="'"+schedules_id+"','"+cinema_id+"','"+show_id+"','"+show_date+"','"+show_time+"','"+show_version+"','"+close_time+"','"+hall_name+"','"+price+"','"+service_fee+"','"+section_id+"','"+schedule_area+"','"+max_can_buy+"'";
+                String inset="'"+schedules_id+"','"+cinema_id+"','"+hall_id+"','"+show_id+"','"+show_date+"','"+show_time+"','"+show_version+"','"+close_time+"','"+hall_name+"','"+price+"','"+service_fee+"','"+section_id+"','"+schedule_area+"','"+max_can_buy+"'";
 
-                String creat_command="INSERT INTO tpp_cinema_schedules(schedules_id,cinema_id,show_id,show_date,show_time,show_version,close_time,hall_name,price,service_fee,section_id,schedule_area,max_can_buy) value ("+inset+")";
+                String creat_command="INSERT INTO tpp_cinema_schedules(schedules_id,cinema_id,hall_id,show_id,show_date,show_time,show_version,close_time,hall_name,price,service_fee,section_id,schedule_area,max_can_buy) value ("+inset+")";
                 logger.info("插入排期："+creat_command);
                 jdbcTemplate.execute(creat_command);
-
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
 
 
             }

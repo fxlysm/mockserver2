@@ -4,6 +4,7 @@ import cn.imovie.mockserver.Wechat.co.payXmlResponse;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 public interface WechatJSServer {

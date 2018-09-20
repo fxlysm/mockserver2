@@ -19,8 +19,9 @@ public class NotifyServer {
     @ApiOperation("模拟客户端接收支付通知")
     @ResponseBody
     @RequestMapping(value = "/handlerNotify", method = RequestMethod.POST)
-    public void payNotify(@RequestParam Map<String, String> map, PrintWriter out , HttpServletRequest request) throws Exception {
-        logger.info("接收到通知");
+    public void payNotify(@RequestParam Map<String, String> map, @RequestBody String  str, PrintWriter out , HttpServletRequest request) throws Exception {
+        logger.info("*****************接收到通知**************************");
+        logger.info("接收到参数如下："+str);
         out.print("SUCCESS");
     }
 }

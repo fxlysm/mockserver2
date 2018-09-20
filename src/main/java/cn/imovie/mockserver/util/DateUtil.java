@@ -383,15 +383,15 @@ public class DateUtil {
         Random rnd=new Random();
         String minutes[]={"00","05","10","15","20","30","40","50"};
         int mm=	(int)(Math.random()*(8));
-
-        int date_r=(date+1)+rnd.nextInt(5);
+        String endtime="";
+        int date_r=(date+1)+2;
         int hour_r=hour+rnd.nextInt(12);
-
+        int end=hour_r-24+2;
         if(month==12&&date_r>=30){
 
-            String starttime=(year+1)+"-01"+"-"+cp(rnd.nextInt(5))+" "+cp(hour)+":"+minutes[mm]+":00";
-            String endtime=(year+1)+"-01"+"-"+cp(rnd.nextInt(5))+" "+cp(hour+2)+":"+minutes[mm]+":00";
-            String show_date=(year+1)+"-01"+"-"+cp(rnd.nextInt(5));
+            String starttime=(year+1)+"-01"+"-"+"02"+" "+cp(hour)+":"+minutes[mm]+":00";
+             endtime=(year+1)+"-01"+"-"+"02"+" "+cp(hour+2)+":"+minutes[mm]+":00";
+            String show_date=(year+1)+"-01"+"-"+"02";
             map.put("starttime",starttime);
             map.put("endtime",endtime);
             map.put("show_date",show_date);
@@ -399,8 +399,17 @@ public class DateUtil {
         }else {
 
             if (hour_r>=24){
+
+
                 String starttime= year+"-"+cp(month+1)+"-"+cp(date_r)+" "+cp(hour_r-24)+":"+minutes[mm]+":00";
-                String endtime= year+"-"+cp(month+1)+"-"+cp(date_r)+" "+cp(hour_r-24+2)+":"+minutes[mm]+":00";
+
+//                if(end>=24){
+//
+//                }else {
+//                    endtime = year+"-"+cp(month+1)+"-"+cp(date_r)+" "+cp(end)+":"+minutes[mm]+":00";
+//                }
+                endtime = year+"-"+cp(month+1)+"-"+cp(date_r+1)+" "+cp(end-24)+":"+minutes[mm]+":00";
+
                 String show_date=year+"-"+cp(month+1)+"-"+cp(date_r);
                 map.put("starttime",starttime);
                 map.put("endtime",endtime);
@@ -408,8 +417,14 @@ public class DateUtil {
                 return map;
             }else
             {
+
+                if(end>=24){
+                     endtime=  year+"-"+cp(month+1)+"-"+cp(date_r+1)+" "+cp(end-24)+":"+minutes[mm]+":00";
+                }else {
+                     endtime=  year+"-"+cp(month+1)+"-"+cp(date_r)+" "+cp(hour_r+2)+":"+minutes[mm]+":00";
+                }
                 String starttime=  year+"-"+cp(month+1)+"-"+cp(date_r)+" "+cp(hour_r)+":"+minutes[mm]+":00";
-                String endtime=  year+"-"+cp(month+1)+"-"+cp(date_r)+" "+cp(hour_r+2)+":"+minutes[mm]+":00";
+//                String endtime=  year+"-"+cp(month+1)+"-"+cp(date_r)+" "+cp(hour_r+2)+":"+minutes[mm]+":00";
                 String show_date=year+"-"+cp(month+1)+"-"+cp(date_r);
                 map.put("starttime",starttime);
                 map.put("endtime",endtime);
@@ -420,7 +435,56 @@ public class DateUtil {
 
         }
 
+
+
+
     }
+
+
+
+
+    /*
+     * 将时间戳转换为时间
+     */
+    public static String stampToTime(String s){
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lt = new Long(s);
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
+    /*
+     * 将时间戳转换为时间
+     */
+    public static String stampToDate(String s){
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        long lt = new Long(s);
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+
+    public static  String GetToday(){
+        Date d = new Date();
+        System.out.println(d);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String dateNowStr = sdf.format(d);
+       return dateNowStr;
+
+    }
+
+    public static  String GetTodayTime(){
+        Date d = new Date();
+        System.out.println(d);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateNowStr = sdf.format(d);
+        return dateNowStr;
+
+    }
+
 
     public static  void main(String args[]) {
 
